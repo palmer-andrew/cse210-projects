@@ -4,6 +4,14 @@ class Program
 {
     static void Main(string[] args)
     {
-        Console.WriteLine("Hello Develop02 World!");
+
+    // creates member variable
+    public string _journal(string);
+    
+    // Function that generates a prompt when given code 'DisplayMenu;'
+    public(void) DisplayMenu(void)
+    {
+
+    }
     }
 }
