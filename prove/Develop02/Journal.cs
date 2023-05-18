@@ -1,9 +1,11 @@
 using System;
+using System.IO; 
 
 // creates a publicly accessible class called 'Journal'
 public class Journal
 {
     public string _journalOwner;
+    public string fileName = "myFile.txt";
 
     //This is assigning an attribute to the Journal class that it is a list of Entry instances, held as a variable in all entries, 
     // and also giving it a starting value of nothing (ie nothing is in that list) 
@@ -43,26 +45,45 @@ public class Journal
     }
 
     public void DisplayJournal()
-    {
-        // _allEntries.Display();
-        
-        foreach (var x in _allEntries)
+    {        
+        foreach (Entry x in _allEntries)
         {
-            Console.WriteLine(x);
+            Console.WriteLine($"{x._date}: {x._prompt} - {x._entry}");
         }
-        
-        
     }
-    // public void SaveJournal()
-    // {
-    // }
+    public void SaveJournal()
+    {
+        Console.WriteLine("What filename do you want to Save the journal as (best as txt)? ");
+        fileName = Console.ReadLine();
+        using (StreamWriter outputFile = new StreamWriter(fileName)) 
+        {
+            foreach (Entry x in _allEntries) 
+            {
+                outputFile.WriteLine($"{x._date}: {x._prompt} - {x._entry}");
+            }
+        }
+            Console.WriteLine($"Journal Saved to {fileName}");
+    }
 
-    // public void LoadJournal()
-    // {
-    // // filename = Console.ReadLine()
-    // }
+    public void LoadJournal()
+    {
+        Console.WriteLine("What filename do you want to Load (best as txt)? ");
+        string fileName = Console.ReadLine();
+        string filePath = (@$"C:\Desktop\{fileName}");
+        using (StreamReader reader = new StreamReader(fileName))
+        // note that this function is not working properly. possibly not the correct file path?
+        
+        {
+            string line;  
+            // Read line by line  
+            while ((line = reader.ReadLine()) != null)  
+            {  
+                Console.WriteLine(line);  
+            }
+            Console.WriteLine($"Opened file {fileName}");
 
-
+        }
+    }
     public string GetPrompt()
     {
         string[] prompts = new string[5];
@@ -74,4 +95,5 @@ public class Journal
         Random rnd = new Random();
         return prompts[rnd.Next(0,prompts.Length)];
     }
+    
 }

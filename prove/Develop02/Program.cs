@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 
 // Creates a publicly accessible class called 'Program'
 public class Program
@@ -35,13 +36,13 @@ public class Program
             }
             if (selectionNumber == 4)
             {
-                Console.WriteLine("\nYou chose #4.");
+            journal.SaveJournal();
             }
             if (selectionNumber == 5)
             {
-                Console.WriteLine("\nYou chose #5.");
+            journal.LoadJournal();
             }
-            if (selectionNumber == 5)
+            if (selectionNumber == 6)
             {
                 Console.Write("\nThank you for using this program. Goodbye.\n\n");
                 break;
